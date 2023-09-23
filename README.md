@@ -57,10 +57,11 @@ There is an example directory structure in the repo that shows how the tool can 
 Once tests have been written, the CLI tool can be used to run individual tests or all tests in a service. The CLI tool
 will also provide a way to run tests in parallel and report the results in a way that is easy to understand.
 
-There are three important concepts about how the tests are organised:
+There are four important concepts about how the tests are organised:
 
 * Test
 * Workflow
+* Step
 * Request
 
 ### Test
@@ -70,9 +71,13 @@ all the workflows in a service.
 
 ### Workflow
 
-A workflow is a set of requests that are performed in a sequence. A workflow can be as simple as a single request, or as
-complex as a set of requests that are performed in a sequence.
+A workflow is a set of steps that are performed in a sequence.
 These workflows are setup as individual files in the service directory.
+
+### Step
+
+A step is a set of code that achieve is a single task. A step can be as simple as a single request, or as complex as a
+set of requests that are performed in a sequence.
 
 ### Request
 
@@ -105,15 +110,74 @@ A request is a single HTTP request that is performed as a part of a workflow.
 
 ### Reports
 
-    * Test
-        * Test ID 
-        * Total run time.
-        * Total number of iterations. (Number of times the test was run. This includes a single run of a workflow or all
-          the workflows in a service.)
-        * Average number of runs per second. (Number of times the test was run per second. This includes a single run of
-          a workflow or all the workflows in a service.)
-    * Workflows
-        * Workflow Name
+#### CLI Report
+
+* Summary
+    * Test ID
+    * Total run time.
+    * Number of Successful Workflow runs.
+    * Number of Failed Workflow runs.
+
+* Workflow Name
+    * Slowest run time.
+    * Fastest run time.
+    * Average run time.
+    * Total number of runs.
+    * Average number of runs per second.
+    * Status Code Distribution
+        * 200
+        * 400
+        * 500
+        * 300
+        * 100
+    * Latency Histogram
+        * P10
+        * P25
+        * P50
+        * P75
+        * P90
+        * P95
+        * P99
+        * P100
+    * Latency Distribution
+        * Auto generated buckets - Count of requests in each bucket.
+
+#### Complete Report
+
+* Summary
+    * Test ID
+    * Total run time.
+    * Number of Successful Workflow runs.
+    * Number of Failed Workflow runs.
+
+* Workflow Name
+    * Slowest run time.
+    * Fastest run time.
+    * Average run time.
+    * Total number of runs.
+    * Average number of runs per second.
+    * Status Code Distribution
+        * 200
+        * 400
+        * 500
+        * 300
+        * 100
+    * Latency Histogram
+        * P10
+        * P25
+        * P50
+        * P75
+        * P90
+        * P95
+        * P99
+        * P100
+    * Latency Distribution
+        * Auto generated buckets - Count of requests in each bucket.
+
+    * <details>
+        <summary>Steps</summary>
+
+        * Step Name
             * Slowest run time.
             * Fastest run time.
             * Average run time.
@@ -136,30 +200,35 @@ A request is a single HTTP request that is performed as a part of a workflow.
                 * P100
             * Latency Distribution
                 * Auto generated buckets - Count of requests in each bucket.
-    * Requests
-        * Request Endpoint and Method
-            * Maximum latency.
-            * Minimum latency.
-            * Average latency.
-            * Total number of requests.
-            * Average number of requests per second.
-            * Status Code Distribution
-                * 200
-                * 400
-                * 500
-                * 300
-                * 100
-            * Latency Histogram
-                * P10
-                * P25
-                * P50
-                * P75
-                * P90
-                * P95
-                * P99
-                * P100
-            * Latency Distribution
-                * Auto generated buckets - Count of requests in each bucket.
+
+            * <details>
+                <summary>Requests</summary>
+
+                * Request Endpoint and Method
+                    * Maximum latency.
+                    * Minimum latency.
+                    * Average latency.
+                    * Total number of requests.
+                    * Average number of requests per second.
+                    * Status Code Distribution
+                        * 200
+                        * 400
+                        * 500
+                        * 300
+                        * 100
+                    * Latency Histogram
+                        * P10
+                        * P25
+                        * P50
+                        * P75
+                        * P90
+                        * P95
+                        * P99
+                        * P100
+                    * Latency Distribution
+                        * Auto generated buckets - Count of requests in each bucket.
+            </details>
+    </details>
 
 ### Configuration
 
